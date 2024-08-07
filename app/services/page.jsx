@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import ServicesSliderBtns from "@/components/ServicesSliderBtns";
+import { Button } from "@/components/ui/button";
 
 const services = [
 	{
@@ -74,6 +75,13 @@ const Services = () => {
 								{service.title}
 							</h2>
 							<p className="text-white/60 ">{service.text}</p>
+							<div className="border border-white/20"></div>
+							<div className="flex items-center gap-10">
+								<p className="text-white/60 ">For much more information </p>
+								<Link href="/contact">
+									<Button>Contact us</Button>
+								</Link>
+							</div>
 						</div>
 					</div>
 					<div className="w-full xl:w-[50%]">
@@ -101,7 +109,10 @@ const Services = () => {
 									</SwiperSlide>
 								);
 							})}
-							<ServicesSliderBtns/>
+							<ServicesSliderBtns
+								containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+								btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-allx"
+							/>
 						</Swiper>
 					</div>
 				</div>

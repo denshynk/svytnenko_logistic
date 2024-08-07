@@ -8,7 +8,7 @@ const Home = () => {
 	return (
 		<section className="h-full overflow-x-hidden">
 			<div className="container mx-auto h-full">
-				<div className="flex flex-col xl:flex-row items-center justify-between pb-8 xl:pt-8 xl:pb-24">
+				<div className="flex flex-col xl:flex-row items-center justify-between pb-8 xl:py-8">
 					<div className="text-center xl:text-left">
 						{/* <span className="text-3xl">
 							International <br />
@@ -26,8 +26,8 @@ const Home = () => {
 					<ServiceSlider />
 				</div>
 			</div>
-			<Marquee />
 			<Stats />
+			<Marquee />
 		</section>
 	);
 };

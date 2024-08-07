@@ -26,8 +26,8 @@ module.exports = {
 			colors: {
 				primary: "#011c16",
 				accent: {
-					DEFAULT: "#10b981",
-					hover: "#00e187",
+					DEFAULT: "#3fc2ab",
+					hover: "#25a18e",
 				},
 			},
 
@@ -48,7 +48,7 @@ module.exports = {
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
-				"moveText": "moveText 15s linear infinite",
+				moveText: "moveText 15s linear infinite",
 			},
 		},
 	},

@@ -38,12 +38,12 @@ const Marquee = () => {
 				opacity: 1,
 				transition: { delay: 2, duration: 0.4, ease: "easeInOut" },
 			}}
-			className="xl:pt-8 mt-8"
+			className="xl:pt-2 mt-8"
 		>
-			<div className="flex">
+			<div className="flex flex-row-reverse">
 				<motion.div
 					initial={{ x: 0 }}
-					animate={{ x: "-100%" }}
+					animate={{ x: "100%" }}
 					transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
 					className="flex flex-shrink-0"
 				>
@@ -60,7 +60,7 @@ const Marquee = () => {
 				</motion.div>
 				<motion.div
 					initial={{ x: 0 }}
-					animate={{ x: "-100%" }}
+					animate={{ x: "100%" }}
 					transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
 					className="flex flex-shrink-0"
 				>

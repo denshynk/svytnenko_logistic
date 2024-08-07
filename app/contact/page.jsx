@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Loader2 } from "lucide-react";
 
 import {
 	Select,
@@ -29,14 +30,65 @@ const info = [
 	},
 	{
 		icon: <FaMapMarkedAlt />,
-		title: "Adress",
+		title: "Address",
 		description: "Kyiv, Ukraine",
 	},
 ];
 
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { sendContactForm } from "@/lib/api";
+
+const initValues = {
+	firstname: "",
+	lastname: "",
+	email: "",
+	phone: "",
+	selectedService: "",
+	message: "",
+};
+const initState = { values: initValues };
 
 const Contact = () => {
+	const [state, setState] = useState(initState);
+	const { values } = state;
+
+	const handleChange = ({ target }) => {
+		setState((prev) => ({
+			...prev,
+			values: {
+				...prev.values,
+				[target.name]: target.value,
+			},
+		}));
+	};
+
+	const handleSelectChange = (selectedService) => {
+		setState((prev) => ({
+			...prev,
+			values: {
+				...prev.values,
+				selectedService,
+			},
+		}));
+	};
+
+	const onSubmit = async () => {
+		setState((prev) => ({
+			...prev,
+			isLoading: true,
+		}));
+		try {
+			await sendContactForm(values);
+		} catch (error) {
+			setState((prev) => ({
+				...prev,
+				isLoding: false,
+				error: error.message,
+			}));
+		}
+	};
+
 	return (
 		<motion.section
 			initial={{ opacity: 0 }}
@@ -56,48 +108,97 @@ const Contact = () => {
 								Necessitatibus beatae rerum vitae praesentium illum?
 							</p>
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-								<Input type="firstname" placeholder="Firstname" />
-								<Input type="lastname" placeholder="Lastname" />
-								<Input type="email" placeholder="Email address" />
-								<Input type="phone" placeholder="Phone number" />
+								<Input
+									type="text"
+									placeholder="Firstname"
+									name="firstname"
+									value={values.firstname}
+									onChange={handleChange}
+								/>
+								<Input
+									type="text"
+									placeholder="Lastname"
+									name="lastname"
+									value={values.lastname}
+									onChange={handleChange}
+								/>
+								<Input
+									type="email"
+									placeholder="Email address"
+									name="email"
+									value={values.email}
+									onChange={handleChange}
+								/>
+								<Input
+									type="text"
+									placeholder="Phone number"
+									name="phone"
+									value={values.phone}
+									onChange={handleChange}
+								/>
 							</div>
-							<Select>
+							<Select onValueChange={handleSelectChange}>
 								<SelectTrigger className="w-full">
 									<SelectValue placeholder="Select a service" />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
-										<SelectLabel>Select a service </SelectLabel>
-										<SelectItem value="dcd">Direct cargo delivery</SelectItem>
-										<SelectItem value="ws">Warehouse storage</SelectItem>
-										<SelectItem value="f">Forwarding</SelectItem>
-										<SelectItem value="gcd">Group cargo delivery</SelectItem>
+										<SelectLabel>Select a service</SelectLabel>
+										<SelectItem value="Direct cargo delivery">
+											Direct cargo delivery
+										</SelectItem>
+										<SelectItem value="Warehouse storage">
+											Warehouse storage
+										</SelectItem>
+										<SelectItem value="Forwarding">Forwarding</SelectItem>
+										<SelectItem value="Group cargo delivery">
+											Group cargo delivery
+										</SelectItem>
 									</SelectGroup>
 								</SelectContent>
 							</Select>
 							<Textarea
 								className="h-[200px]"
 								placeholder="Type your message here."
+								name="message"
+								value={values.message}
+								onChange={handleChange}
 							/>
-							<Button size="md" className="max-w-40">
+							<Button
+								size="md"
+								className="max-w-40"
+								onClick={onSubmit}
+								disabled={
+									!values.name ||
+									!values.email ||
+									!values.subject ||
+									!values.message
+								}
+							>
 								Send message
+							</Button>
+							<Button disabled>
+								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+								Please wait
 							</Button>
 						</form>
 					</div>
 					<div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
 						<ul className="flex flex-col gap-10">
-              {info.map((item, index)=>{
-                return <li key={index} className="flex items-center gap-6">
-                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center ">
-                    <div className="text-[24px]">{item.icon}</div>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-white/60">{item.title}</p>
-                    <h3 className="text-xl">{item.description}</h3>
-                  </div>
-                </li>
-              })}
-            </ul>
+							{info.map((item, index) => {
+								return (
+									<li key={index} className="flex items-center gap-6">
+										<div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center ">
+											<div className="text-[24px]">{item.icon}</div>
+										</div>
+										<div className="flex-1">
+											<p className="text-white/60">{item.title}</p>
+											<h3 className="text-xl">{item.description}</h3>
+										</div>
+									</li>
+								);
+							})}
+						</ul>
 					</div>
 				</div>
 			</div>
