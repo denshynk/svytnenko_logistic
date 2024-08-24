@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Background from "@/components/Background";
 import Marquee from "@/components/Marquee";
 import ServiceSlider from "@/components/ServiceSlider";
@@ -20,38 +21,35 @@ const Home = () => {
 	const headingChar = splitString(mainttext1);
 	const headingChar2 = splitString(mainttext2);
 
+	const [isXl, setIsXl] = useState(false);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsXl(window.innerWidth >= 1280); // xl breakpoint
+		};
+
+		handleResize(); // Initial check
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	return (
 		<section className="h-full overflow-visible">
 			<Background />
 			<div className="container mx-auto h-full">
 				<div className="flex flex-col items-center justify-between pb-8">
 					<div className="text-center">
-						<motion.h1
-							className="h1 pt-5 pb-5"
-							initial="hidden"
-							animate="reveal"
-							variants={charVariants}
-							transition={{ staggerChildren: 0.02, delayChildren: 2 }}
-						>
-							{headingChar.map((char) => (
-								<motion.span
-									key={char}
-									variants={charVariants}
-									transition={{ duration: 1 }}
-								>
-									{char}
-								</motion.span>
-							))}
-							<br />
-							<motion.span
-								className="text-accent"
+						{isXl ? (
+							<motion.h1
+								className="h1 pt-5 pb-5"
 								initial="hidden"
 								animate="reveal"
-								variants={charVariants}
-								transition={{ staggerChildren: 0.015, delayChildren: 3 }}
+								transition={{ staggerChildren: 0.02, delayChildren: 2 }}
 							>
-								{headingChar2.map((char) => (
+								{headingChar.map((char) => (
 									<motion.span
+										className="scale-up"
 										key={char}
 										variants={charVariants}
 										transition={{ duration: 1 }}
@@ -59,8 +57,40 @@ const Home = () => {
 										{char}
 									</motion.span>
 								))}
-							</motion.span>
-						</motion.h1>
+								<br />
+								<motion.span
+									className="text-accent"
+									initial="hidden"
+									animate="reveal"
+									variants={charVariants}
+									transition={{ staggerChildren: 0.015, delayChildren: 3 }}
+								>
+									{headingChar2.map((char) => (
+										<motion.span
+											key={char}
+											variants={charVariants}
+											transition={{ duration: 1 }}
+										>
+											{char}
+										</motion.span>
+									))}
+								</motion.span>
+							</motion.h1>
+						) : (
+							<h1 className="h1 pt-5 pb-5">
+								{headingChar.map((char, index) => (
+									<span className="scale-up" key={index}>
+										{char}
+									</span>
+								))}
+								<br />
+								<span className="text-accent">
+									{headingChar2.map((char, index) => (
+										<span key={index}>{char}</span>
+									))}
+								</span>
+							</h1>
+						)}
 					</div>
 				</div>
 			</div>
