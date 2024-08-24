@@ -32,51 +32,53 @@ const Marquee = () => {
 	}, []);
 
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{
-				opacity: 1,
-				transition: { delay: 2, duration: 0.4, ease: "easeInOut" },
-			}}
-			className="xl:pt-8 mt-8"
-		>
-			<div className="flex">
-				<motion.div
-					initial={{ x: 0 }}
-					animate={{ x: "-100%" }}
-					transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-					className="flex flex-shrink-0"
-				>
-					{upperMarquee.map((image, index) => {
-						return (
-							<img
-								key={index}
-								className="max-h-[80px] mr-10"
-								src={image}
-								alt=""
-							/>
-						);
-					})}
-				</motion.div>
-				<motion.div
-					initial={{ x: 0 }}
-					animate={{ x: "-100%" }}
-					transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-					className="flex flex-shrink-0"
-				>
-					{upperMarquee.map((image, index) => {
-						return (
-							<img
-								key={index}
-								className="max-h-[80px] mr-10"
-								src={image}
-								alt=""
-							/>
-						);
-					})}
-				</motion.div>
-			</div>
-		</motion.div>
+		<div className="container mx-auto xl:pt-8 overflow-hidden">
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{
+					opacity: 1,
+					transition: { delay: 2, duration: 0.4, ease: "easeInOut" },
+				}}
+				className="xl:pt-8 mt-8"
+			>
+				<div className="flex">
+					<motion.div
+						initial={{ x: 0 }}
+						animate={{ x: "-100%" }}
+						transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+						className="flex flex-shrink-0"
+					>
+						{upperMarquee.map((image, index) => {
+							return (
+								<img
+									key={index}
+									className="max-h-[80px] mr-10"
+									src={image}
+									alt=""
+								/>
+							);
+						})}
+					</motion.div>
+					<motion.div
+						initial={{ x: 0 }}
+						animate={{ x: "-100%" }}
+						transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+						className="flex flex-shrink-0"
+					>
+						{upperMarquee.map((image, index) => {
+							return (
+								<img
+									key={index}
+									className="max-h-[80px] mr-10"
+									src={image}
+									alt=""
+								/>
+							);
+						})}
+					</motion.div>
+				</div>
+			</motion.div>
+		</div>
 	);
 };
 

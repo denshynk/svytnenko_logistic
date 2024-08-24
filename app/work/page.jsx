@@ -1,14 +1,14 @@
 "use client";
 
+import Background from "@/components/Background";
 import Marquee from "@/components/Marquee"
 import MarqueeRev from "@/components/MarqueeRev"
 
 const WorkWith = () => {
   return (
 		<section className=" h-full overflow-x-hidden">
-			<div className="overflow-visiable flex flex-col gap-[35px]">
-				<Marquee />
-				<MarqueeRev />
+			<Background/>
+			<div className="flex flex-col gap-[35px]">
 				<Marquee />
 				<MarqueeRev />
 			</div>

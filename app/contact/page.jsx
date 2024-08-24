@@ -21,12 +21,12 @@ const info = [
 	{
 		icon: <FaPhoneAlt />,
 		title: "Phone",
-		description: "+38 (97) 733 93 73",
+		description: "+380 (67) 465-9106",
 	},
 	{
 		icon: <FaEnvelope />,
 		title: "Email",
-		description: "youremail@svyatnenko.com.ua",
+		description: "sergey@svyatnenko.com.ua",
 	},
 	{
 		icon: <FaMapMarkedAlt />,
@@ -38,6 +38,7 @@ const info = [
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { sendContactForm } from "@/lib/api";
+import Background from "@/components/Background";
 
 const initValues = {
 	firstname: "",
@@ -74,6 +75,7 @@ const Contact = () => {
 	};
 
 	const onSubmit = async () => {
+		event.preventDefault(); // Prevent the default form submission
 		setState((prev) => ({
 			...prev,
 			isLoading: true,
@@ -98,28 +100,18 @@ const Contact = () => {
 			}}
 			className="py-6"
 		>
+			<Background />
 			<div className="container mx-auto">
 				<div className="flex flex-col xl:flex-row gap-[30px]">
 					<div className="xl:w-[54%] order-2 xl:order-none">
-						<form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+						<form className="flex flex-col gap-6 p-10 bg-white bg-opacity-20 backdrop-blur-lg rounded-xl">
 							<h3 className="text-4xl text-accent">Let&apos;s work together</h3>
-							<p className="text-white/60">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
-								Necessitatibus beatae rerum vitae praesentium illum?
-							</p>
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div className="grid font-mavka grid-cols-1 md:grid-cols-2 gap-6">
 								<Input
 									type="text"
 									placeholder="Firstname"
 									name="firstname"
 									value={values.firstname}
-									onChange={handleChange}
-								/>
-								<Input
-									type="text"
-									placeholder="Lastname"
-									name="lastname"
-									value={values.lastname}
 									onChange={handleChange}
 								/>
 								<Input
@@ -137,28 +129,9 @@ const Contact = () => {
 									onChange={handleChange}
 								/>
 							</div>
-							<Select onValueChange={handleSelectChange}>
-								<SelectTrigger className="w-full">
-									<SelectValue placeholder="Select a service" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										<SelectLabel>Select a service</SelectLabel>
-										<SelectItem value="Direct cargo delivery">
-											Direct cargo delivery
-										</SelectItem>
-										<SelectItem value="Warehouse storage">
-											Warehouse storage
-										</SelectItem>
-										<SelectItem value="Forwarding">Forwarding</SelectItem>
-										<SelectItem value="Group cargo delivery">
-											Group cargo delivery
-										</SelectItem>
-									</SelectGroup>
-								</SelectContent>
-							</Select>
+							
 							<Textarea
-								className="h-[200px]"
+								className="h-[200px] font-mavka"
 								placeholder="Type your message here."
 								name="message"
 								value={values.message}
@@ -166,25 +139,26 @@ const Contact = () => {
 							/>
 							<Button
 								size="md"
-								className="max-w-40"
+								className="max-w-40 font-mavka"
 								onClick={onSubmit}
+								type="submit"
 								disabled={
-									!values.name ||
+									!values.firstname ||
 									!values.email ||
-									!values.subject ||
-									!values.message
+									!values.phone ||
+									!values.lastname
 								}
 							>
 								Send message
 							</Button>
-							<Button disabled>
+							{/* <Button disabled>
 								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 								Please wait
-							</Button>
+							</Button> */}
 						</form>
 					</div>
 					<div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
-						<ul className="flex flex-col gap-10">
+						<ul className="flex flex-col gap-10 font-mavka">
 							{info.map((item, index) => {
 								return (
 									<li key={index} className="flex items-center gap-6">

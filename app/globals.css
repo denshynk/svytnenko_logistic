@@ -4,16 +4,26 @@
 
 @layer base {
 	body {
-		@apply font-primary bg-primary text-white leading-loose;
+		@apply font-theYoungest bg-primary text-white leading-loose;
 	}
 
 	.h1 {
-		@apply text-[32px] xl:text-[62px] leading-[1.1] font-semibold;
+		@apply text-[72px] xl:text-[72px] leading-[1.1] font-semibold;
 	}
 	.h2 {
-		@apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
+		@apply text-[36px] font-mavka xl:text-[48px] leading-[1.1] font-semibold;
 	}
 	.h3 {
-		@apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
+		@apply text-[26px] font-mavka  xl:text-[34px] leading-[1.1] font-semibold;
 	}
+}
+
+#bg-wrap {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }

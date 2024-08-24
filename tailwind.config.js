@@ -21,12 +21,14 @@ module.exports = {
 		},
 		fontFamily: {
 			primary: "var(--font-jetbrainsMono)",
+			theYoungest: "var(--font-theYoungest)",
+			mavka: "var(--font-mavka)",
 		},
 		extend: {
 			colors: {
-				primary: "#011c16",
+				primary: "#a21caf",
 				accent: {
-					DEFAULT: "#3fc2ab",
+					DEFAULT: "#FFD700",
 					hover: "#25a18e",
 				},
 			},

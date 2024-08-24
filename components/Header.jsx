@@ -11,17 +11,17 @@ const Header = () => {
 			<div className="container mx-auto flex justify-between items-center">
 				<Link href="/">
 					<h1 className="text-4xl font-semibold">
-						Svyatnenko <span className="text-accent">logistic</span>
+						 <span className="text-accent">SS</span>
 					</h1>
 				</Link>
-				<div className="hidden xl:flex items-center gap-8">
+				<div className="xl:flex items-center gap-8">
 					<Nav />
 					<Link href="/contact">
-						<Button>Hire us</Button>
+						<Button className="font-mavka">Hire us</Button>
 					</Link>
 				</div>
 
-				<div className="xl:hidden">
+				<div className="hidden">
 					<MobileNav />
 				</div>
 			</div>
